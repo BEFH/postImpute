@@ -172,7 +172,8 @@ if zipped:
         conda: 'envs/p7z.yaml'
         threads: 4
         resources:
-            mem_mb = 4000,
+            #mem_mb = 4000,
+            mem_mb = 16000,
             time_min = 5
         shell:
             r'''
@@ -217,7 +218,8 @@ rule stats:
     conda: "envs/r_stats.yaml"
     threads: 22
     resources:
-        mem_mb = 4000,
+        #mem_mb = 4000,
+        mem_mb = 88000,
         #walltime = '8:00'
         time_min = 480
     script: "scripts/Post_imputation.Rmd"
@@ -303,7 +305,8 @@ if sampfilt and minimac_version in ['guess', '3']:
             sf = sampfilt
         threads: 8
         resources:
-            mem_mb = 256,
+            #mem_mb = 256,
+            mem_mb = 2048,
             #walltime = '24:00'
             time_min = 1440
         conda: "envs/bcftools.yaml"
@@ -337,7 +340,8 @@ elif minimac_version in ['guess', '3']:
             filt = qualfilt
         threads: 8
         resources:
-            mem_mb = 256,
+            #mem_mb = 256,
+            mem_mb = 2048,
            # walltime = '24:00'
             time_min = 1440
         conda: "envs/bcftools.yaml"
@@ -370,7 +374,8 @@ elif sampfilt:
             sf = sampfilt
         threads: 8
         resources:
-            mem_mb = 256,
+            #mem_mb = 256,
+            mem_mb = 2048,
             #walltime = '24:00'
             time_min = 1440
         conda: "envs/bcftools.yaml"
@@ -392,7 +397,8 @@ else:
             filt = qualfilt
         threads: 8
         resources:
-            mem_mb = 256,
+            #mem_mb = 256,
+            mem_mb = 2048,
             #walltime = '24:00'
             time_min = 1440
         conda: "envs/bcftools.yaml"
@@ -437,7 +443,8 @@ rule rename:
     conda: "envs/bcftools.yaml"
     threads: 2
     resources:
-        mem_mb = 1024,
+        #mem_mb = 1024,
+        mem_mb = 2048,
         time_min = 60
     shell:
         '''
@@ -468,7 +475,8 @@ rule renameAuto:
     conda: "envs/bcftools.yaml"
     threads: 2
     resources:
-        mem_mb = 1024,
+        #mem_mb = 1024,
+        mem_mb = 2048,
         time_min = 60
     shell:
         '''
@@ -481,7 +489,8 @@ rule concat_chroms_samp:
     output: "{impute_dir}/data/{cohort}_chrall_filtered.vcf.gz"
     threads: 8
     resources:
-        mem_mb = 512,
+        #mem_mb = 512,
+        mem_mb = 4096,
         #walltime = '24:00'
         time_min = 1440
     conda: "envs/bcftools.yaml"
@@ -504,7 +513,8 @@ rule merge_samples_chrom:
     output: "{impute_dir}/data/by_chrom/all_chr{chrom}_filtered.vcf.gz"
     threads: 8
     resources:
-        mem_mb = 2000,
+        #mem_mb = 2000,
+        mem_mb = 16000,
         #walltime = "36:00"
         time_min = 2160
     conda: "envs/bcftools.yaml"
@@ -515,7 +525,8 @@ rule concat_chroms_all:
     output: "{impute_dir}/data/all_chrall_filtered.vcf.gz"
     threads: 8
     resources:
-        mem_mb = 256,
+        #mem_mb = 256,
+        mem_mb = 2048,
         #walltime = "24:00"
         time_min = 1440
     conda: "envs/bcftools.yaml"
@@ -529,7 +540,8 @@ rule make_plink_all:
         ID = "--id-delim" if automap_tf else "--double-id"
     threads: 10
     resources:
-        mem_mb = 3000,
+        #mem_mb = 3000,
+        mem_mb = 30000,
         #walltime = "96:00"
         time_min = 5760
     conda: "envs/plink.yaml"
@@ -545,7 +557,8 @@ rule make_plink_samp:
         ID = "--id-delim" if automap_tf else "--double-id "
     threads: 10
     resources:
-        mem_mb = 1000,
+        #mem_mb = 1000,
+        mem_mb = 10000,
         #walltime = "2:00"
         time_min = 120
     conda: "envs/plink.yaml"
